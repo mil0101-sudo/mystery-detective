@@ -1,0 +1,1467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind Closed Doors</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+ --navy:#29374b;
+ --cream:#f7f4ed;
+ --pink:#d6a6a5;
+ --sage:#a8b7a1;
+ --paper:#fffefa;
+ --text:#303746;
+ --muted:#888b96;
+ --border:#e8e2d8;
+}
+
+* {box-sizing:border-box}
+body {
+ margin:0;
+ background:var(--cream);
+ color:var(--text);
+ font-family:'DM Sans',sans-serif;
+}
+button,input,select {font:inherit}
+button {cursor:pointer;transition:.18s}
+button:hover {transform:translateY(-2px)}
+button:disabled {opacity:.4;cursor:not-allowed;transform:none}
+header {
+ background:var(--navy);
+ color:white;
+ padding:16px 5%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+}
+.logo {
+ font-family:'Playfair Display',serif;
+ font-size:21px;
+ letter-spacing:1px;
+}
+.header-info {font-size:12px;color:#e8dfd1;text-align:right}
+main {max-width:1050px;margin:28px auto;padding:0 16px 40px}
+h1,h2,h3 {font-family:'Playfair Display',serif}
+h1 {font-size:39px}
+h2 {font-size:26px;margin-top:0}
+p {line-height:1.65}
+.card {
+ background:var(--paper);
+ border:1px solid var(--border);
+ border-radius:16px;
+ padding:23px;
+ margin-bottom:17px;
+ box-shadow:0 5px 20px #29374b09;
+}
+.hidden {display:none!important}
+.eyebrow {
+ color:#a17c7b;
+ font-size:11px;
+ font-weight:700;
+ letter-spacing:2px;
+ text-transform:uppercase;
+}
+.muted {color:var(--muted)}
+.primary {
+ background:var(--navy);
+ color:white;
+ border:0;
+ padding:13px 21px;
+ border-radius:9px;
+ font-weight:700;
+}
+.secondary {
+ background:#ece9e1;
+ color:var(--navy);
+ border:0;
+ padding:11px 16px;
+ border-radius:9px;
+ font-weight:600;
+}
+.pink {
+ background:#f1dddd;
+ color:#784d50;
+ border:0;
+ padding:11px 16px;
+ border-radius:9px;
+ font-weight:600;
+}
+input,select {
+ display:block;
+ width:100%;
+ padding:12px;
+ border:1px solid #ddd7cc;
+ border-radius:8px;
+ background:white;
+ margin-top:7px;
+ color:var(--text);
+}
+label {
+ display:block;
+ font-size:13px;
+ font-weight:700;
+ margin:13px 0;
+}
+.grid2 {
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+}
+.grid3 {
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:12px;
+}
+.creator {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:25px;
+ align-items:center;
+}
+.avatar {
+ position:relative;
+ height:230px;
+ width:170px;
+ margin:auto;
+ border-radius:90px 90px 18px 18px;
+ background:#e8dcd2;
+ border:5px solid white;
+ box-shadow:0 5px 18px #0001;
+ overflow:hidden;
+}
+.avatar-head {
+ position:absolute;
+ top:40px;
+ left:35px;
+ height:112px;
+ width:100px;
+ border-radius:48% 48% 45% 45%;
+ background:#d9a17e;
+ z-index:2;
+}
+.avatar-hair {
+ position:absolute;
+ top:-9px;
+ left:-5px;
+ width:110px;
+ height:57px;
+ border-radius:60px 60px 15px 15px;
+ background:#543b31;
+}
+.avatar-eyes {
+ position:absolute;
+ top:58px;
+ left:21px;
+ font-size:17px;
+ letter-spacing:17px;
+ color:#39302d;
+}
+.avatar-mouth {
+ position:absolute;
+ top:84px;
+ left:43px;
+ width:17px;
+ height:8px;
+ border-bottom:2px solid #8b514e;
+ border-radius:50%;
+}
+.avatar-body {
+ position:absolute;
+ bottom:-25px;
+ left:10px;
+ width:140px;
+ height:110px;
+ border-radius:65px 65px 0 0;
+ background:#788d9c;
+}
+.avatar-preview-label {
+ text-align:center;
+ font-size:12px;
+ color:var(--muted);
+}
+.stats {
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+ margin-bottom:17px;
+}
+.stat {
+ padding:13px;
+ background:white;
+ border:1px solid var(--border);
+ border-radius:10px;
+ font-size:12px;
+}
+.stat strong {
+ display:block;
+ color:var(--navy);
+ font-size:17px;
+ margin-top:4px;
+}
+.tabs {
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:18px;
+}
+.tabs button {font-size:12px}
+.location {
+ text-align:left;
+ min-height:140px;
+ padding:17px;
+ border:1px solid transparent;
+ border-radius:12px;
+ background:#efede6;
+ color:var(--text);
+}
+.location:hover {
+ background:#f3e5e2;
+ border-color:var(--pink);
+}
+.location .emoji {display:block;font-size:28px;margin-bottom:10px}
+.location strong {display:block}
+.location small {color:var(--muted);line-height:1.5}
+.scene-banner {
+ background:linear-gradient(120deg,#e6ddd0,#f1e8df);
+ padding:23px;
+ border-radius:12px;
+ margin-bottom:17px;
+}
+.scene-banner h2 {margin-bottom:6px}
+.choice {
+ display:block;
+ width:100%;
+ text-align:left;
+ background:#f0eee8;
+ color:var(--text);
+ border:1px solid #e7e0d5;
+ padding:14px;
+ border-radius:9px;
+ margin:9px 0;
+}
+.choice:hover {background:#f5e7e3;border-color:var(--pink)}
+.character {
+ display:flex;
+ align-items:center;
+ gap:13px;
+ background:#f2f0e9;
+ padding:13px;
+ border-radius:11px;
+ margin:10px 0;
+}
+.portrait {
+ width:65px;
+ height:72px;
+ flex-shrink:0;
+ border-radius:34px 34px 12px 12px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:30px;
+}
+.character-info {flex:1;min-width:0}
+.character-info small {color:var(--muted)}
+.bar {
+ height:7px;
+ border-radius:20px;
+ background:#e4e0d9;
+ overflow:hidden;
+ margin:7px 0 4px;
+}
+.bar-fill {
+ height:100%;
+ background:#b98d91;
+ border-radius:20px;
+}
+.note {
+ padding:13px;
+ margin:9px 0;
+ border-radius:7px;
+ background:#f1eee7;
+ border-left:3px solid var(--pink);
+ font-size:14px;
+ line-height:1.6;
+}
+.badge {
+ display:inline-block;
+ background:#e9e5dc;
+ border-radius:20px;
+ padding:5px 9px;
+ font-size:11px;
+ color:var(--navy);
+ margin:3px;
+}
+.chapter-row {
+ padding:13px;
+ background:#f0eee8;
+ border-radius:9px;
+ margin:8px 0;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+}
+.chapter-row small {color:var(--muted)}
+.progress {
+ height:9px;
+ background:#e6e2da;
+ border-radius:20px;
+ overflow:hidden;
+ margin:12px 0;
+}
+.progress-fill {
+ height:100%;
+ background:var(--sage);
+ transition:.3s;
+}
+.message {
+ padding:14px;
+ background:#f0eee8;
+ border-radius:12px;
+ margin:10px 0;
+}
+.message strong {color:#8b6669}
+.phone {
+ background:#e8e9e5;
+ border-radius:20px;
+ padding:15px;
+ max-width:500px;
+ margin:auto;
+}
+.bubble {
+ background:white;
+ padding:12px 15px;
+ border-radius:15px 15px 15px 3px;
+ max-width:85%;
+ margin:10px 0;
+ font-size:14px;
+}
+.bubble.me {
+ background:#dce8d7;
+ margin-left:auto;
+ border-radius:15px 15px 3px 15px;
+}
+#toast {
+ display:none;
+ position:fixed;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ background:var(--navy);
+ color:white;
+ padding:12px 20px;
+ border-radius:10px;
+ z-index:20;
+ max-width:90%;
+ text-align:center;
+}
+footer {
+ text-align:center;
+ color:var(--muted);
+ font-size:12px;
+ padding:20px;
+}
+@media(max-width:650px) {
+ .creator {grid-template-columns:1fr}
+ .stats {grid-template-columns:repeat(2,1fr)}
+ .grid3 {grid-template-columns:repeat(2,1fr)}
+ h1 {font-size:31px}
+ header {padding:14px}
+ .logo {font-size:17px}
+ .card {padding:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">BEHIND CLOSED DOORS</div>
+ <div class="header-info">
+  WESTBRIDGE HIGH<br>
+  YOUR STORY. YOUR CHOICES.
+ </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="card">
+ <p class="eyebrow">A choose-your-own-story adventure</p>
+ <h1>Behind Closed Doors.</h1>
+ <p class="muted">A new school. New friendships. Old secrets.</p>
+ <p>
+  It is your first day at Westbridge High. Everyone seems to know
+  everyone, but there is something strange about this school.
+  A trophy has disappeared, old friendships are falling apart,
+  and nobody seems to want to talk about what happened.
+ </p>
+ <p><strong>You decide who you become, who you trust and what you discover.</strong></p>
+ <button class="primary" onclick="show('creator')">START A NEW STORY →</button>
+ <button class="secondary" onclick="loadGame()">CONTINUE STORY</button>
+ <p class="muted" style="font-size:12px">Your progress saves on this browser.</p>
+</section>
+
+<!-- CREATOR -->
+<section id="creator" class="card hidden">
+ <p class="eyebrow">Character creation</p>
+ <h2>Create your character</h2>
+ <p class="muted">Everyone else has their own fixed appearance. This character is yours.</p>
+ <div class="creator">
+  <div>
+   <div class="avatar">
+    <div class="avatar-body" id="bodyPreview"></div>
+    <div class="avatar-head" id="headPreview">
+     <div class="avatar-hair" id="hairPreview"></div>
+     <div class="avatar-eyes">• •</div>
+     <div class="avatar-mouth"></div>
+    </div>
+   </div>
+   <p class="avatar-preview-label">Your character preview</p>
+  </div>
+  <div>
+   <label>Character name
+    <input id="playerName" maxlength="20" placeholder="Enter your name">
+   </label>
+   <label>Skin tone
+    <select id="skin" onchange="updateAvatar()">
+     <option value="#f0c9a9">Light</option>
+     <option value="#d9a17e">Medium</option>
+     <option value="#a96e50">Tan</option>
+     <option value="#704633">Deep</option>
+     <option value="#493027">Dark</option>
+    </select>
+   </label>
+   <label>Hair colour
+    <select id="hair" onchange="updateAvatar()">
+     <option value="#543b31">Brown</option>
+     <option value="#252321">Black</option>
+     <option value="#d1a45d">Blonde</option>
+     <option value="#a65d4c">Auburn</option>
+     <option value="#806d9a">Purple</option>
+    </select>
+   </label>
+   <label>Outfit
+    <select id="outfit" onchange="updateAvatar()">
+     <option value="#788d9c">Blue</option>
+     <option value="#b78d91">Dusty pink</option>
+     <option value="#788a78">Sage green</option>
+     <option value="#303746">Navy</option>
+     <option value="#c6a77b">Beige</option>
+    </select>
+   </label>
+   <button class="primary" onclick="beginStory()">ENTER WESTBRIDGE →</button>
+  </div>
+ </div>
+</section>
+
+<!-- MAIN GAME -->
+<section id="game" class="hidden">
+ <div class="stats">
+  <div class="stat">📅 DAY<strong id="dayStat">Monday</strong></div>
+  <div class="stat">🕒 TIME<strong id="timeStat">8:30 AM</strong></div>
+  <div class="stat">⭐ POINTS<strong id="scoreStat">0</strong></div>
+  <div class="stat">📖 CHAPTER<strong id="chapterStat">1/20</strong></div>
+ </div>
+
+ <div class="card">
+  <div class="tabs">
+   <button class="secondary" onclick="tab('map')">🗺 Explore</button>
+   <button class="secondary" onclick="tab('people')">👥 People</button>
+   <button class="secondary" onclick="tab('chapters')">📖 Chapters</button>
+   <button class="secondary" onclick="tab('journal')">📓 Journal</button>
+   <button class="secondary" onclick="tab('evidence')">🔎 Evidence</button>
+   <button class="secondary" onclick="tab('phone')">📱 Phone</button>
+   <button class="secondary" onclick="saveGame()">💾 Save</button>
+  </div>
+
+  <!-- MAP -->
+  <div id="mapTab">
+   <p class="eyebrow">Westbridge High School</p>
+   <h2>Where would you like to go?</h2>
+   <p class="muted">Explore, meet people, make friends or investigate. It's your choice.</p>
+   <div class="grid2" id="locationList"></div>
+  </div>
+
+  <!-- PEOPLE -->
+  <div id="peopleTab" class="hidden">
+   <p class="eyebrow">Your social life</p>
+   <h2>People you know</h2>
+   <p class="muted">Relationships grow through your conversations and decisions.</p>
+   <div id="peopleList"></div>
+  </div>
+
+  <!-- CHAPTERS -->
+  <div id="chaptersTab" class="hidden">
+   <p class="eyebrow">Your story</p>
+   <h2>Twenty chapters</h2>
+   <div class="progress"><div id="storyProgress" class="progress-fill"></div></div>
+   <p id="progressLabel" class="muted"></p>
+   <div id="chapterList"></div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div id="journalTab" class="hidden">
+   <p class="eyebrow">Personal diary</p>
+   <h2>Your journal</h2>
+   <div id="journalList"></div>
+  </div>
+
+  <!-- EVIDENCE -->
+  <div id="evidenceTab" class="hidden">
+   <p class="eyebrow">Detective notebook</p>
+   <h2>Evidence collected</h2>
+   <p class="muted">Keep track of everything you discover.</p>
+   <div id="evidenceList"></div>
+  </div>
+
+  <!-- PHONE -->
+  <div id="phoneTab" class="hidden">
+   <p class="eyebrow">Messages</p>
+   <h2>Your phone</h2>
+   <div class="phone">
+    <p style="text-align:center;font-weight:bold">Messages</p>
+    <div id="messages"></div>
+   </div>
+  </div>
+ </div>
+
+ <!-- CURRENT SCENE -->
+ <div id="scene" class="card"></div>
+</section>
+
+<!-- ENDING -->
+<section id="ending" class="card hidden">
+ <p class="eyebrow">Westbridge High</p>
+ <h1>The End.</h1>
+ <div id="endingContent"></div>
+ <h2 id="endingScore"></h2>
+ <p id="endingRank"></p>
+ <button class="primary" onclick="restartGame()">START A NEW STORY</button>
+</section>
+
+</main>
+
+<div id="toast"></div>
+<footer>BEHIND CLOSED DOORS · A STORY WHERE EVERY CHOICE MATTERS</footer>
+
+<script>
+
+/* ===================================
+   CHARACTERS
+=================================== */
+
+const characters = [
+ {
+  id:"sophie",name:"Sophie",emoji:"🌷",role:"The friendly one",
+  description:"Outgoing, funny and always knows everyone's business.",
+  colour:"#ead8d3",relation:0
+ },
+ {
+  id:"noah",name:"Noah",emoji:"📚",role:"The quiet one",
+  description:"Observant, thoughtful and difficult to understand.",
+  colour:"#d5dce7",relation:0
+ },
+ {
+  id:"amelia",name:"Amelia",emoji:"✨",role:"The popular one",
+  description:"Confident, competitive and surprisingly secretive.",
+  colour:"#e8d9c0",relation:0
+ },
+ {
+  id:"ethan",name:"Ethan",emoji:"🎧",role:"The class clown",
+  description:"Funny, charming and always getting into something.",
+  colour:"#d7e0d1",relation:0
+ },
+ {
+  id:"ruby",name:"Ruby",emoji:"🎨",role:"The creative one",
+  description:"Independent, imaginative and a little mysterious.",
+  colour:"#e3d5e7",relation:0
+ }
+];
+
+/* ===================================
+   SCHOOL LOCATIONS
+=================================== */
+
+const locations = [
+ ["hall","🏫","Main Hall","Meet people and explore the school."],
+ ["cafe","🥐","Cafeteria","Lunch, conversations and rumours."],
+ ["library","📚","Library","Books, quiet corners and discoveries."],
+ ["yard","🌿","Courtyard","Hang out and get some fresh air."],
+ ["class","✏️","Classroom","Lessons and unexpected encounters."],
+ ["art","🎨","Art Room","Create something and meet Ruby."],
+ ["gym","🏀","Sports Hall","Play games and meet new people."],
+ ["office","🗄️","Administration","School records and important information."]
+];
+
+/* ===================================
+   THE COMPLETE 20 CHAPTER STORY
+=================================== */
+
+const chapters = [
+
+{
+ title:"A Fresh Start",
+ place:"Main Hall",
+ story:"It's your first morning at Westbridge High. Students hurry through the hallways. You don't recognise a single face. A girl with a pink bag approaches you.",
+ choices:[
+  ["Smile and introduce yourself.","Sophie immediately welcomes you. She seems genuinely excited to meet someone new.",{sophie:12},null],
+  ["Ask where your classroom is.","Sophie points you in the right direction and offers to show you around.",{sophie:8},null],
+  ["Thank her but explore alone.","You decide to look around first. Sophie waves as you walk away.",{},null]
+ ]
+},
+
+{
+ title:"The Lunch Table",
+ place:"Cafeteria",
+ story:"At lunchtime, Sophie waves you over. Noah is reading at one end of the table, Ethan is telling a story and Amelia is scrolling through her phone.",
+ choices:[
+  ["Sit with everyone.","The group makes room for you. Ethan starts telling an exaggerated story.",{sophie:5,ethan:10,amelia:3,noah:3},null],
+  ["Sit beside Noah.","Noah closes his book and starts a quiet conversation with you.",{noah:12},null],
+  ["Find a table of your own.","You enjoy some time alone. You notice the students seem unusually interested in an empty trophy cabinet.",{},["The empty trophy cabinet"]]
+ ]
+},
+
+{
+ title:"An Empty Cabinet",
+ place:"Main Hall",
+ story:"You pass the trophy cabinet again. A small crowd has gathered. The school's most important trophy has disappeared. Nobody knows exactly when it happened.",
+ choices:[
+  ["Ask Sophie what happened.","She says it disappeared yesterday afternoon. She seems nervous discussing it.",{sophie:8},["The trophy disappeared yesterday afternoon"]],
+  ["Examine the cabinet.","You notice a small scratch near the lock and a folded paper on the floor.",{},["A scratch near the cabinet lock","A folded piece of paper"]],
+  ["Ask Amelia if she knows anything.","She says she doesn't know anything, but quickly changes the subject.",{amelia:5},["Amelia avoided the question"]]
+ ]
+},
+
+{
+ title:"Getting to Know Everyone",
+ place:"Courtyard",
+ story:"A few days have passed. You are beginning to recognise familiar faces. Ruby is sitting in the courtyard drawing, while Ethan is trying to organise a game.",
+ choices:[
+  ["Spend time with Ruby.","She shows you her drawings and tells you about the school's history.",{ruby:15},["Ruby knows a lot about the school's history"]],
+  ["Join Ethan's game.","Everyone laughs. Ethan says you should join them again tomorrow.",{ethan:15},null],
+  ["Ask Noah to study together.","Noah agrees. He mentions that some school records are missing.",{noah:12},["Some school records are missing"]]
+ ]
+},
+
+{
+ title:"The Old Photograph",
+ place:"Library",
+ story:"While looking through an old school yearbook, you find a photograph of the trophy ceremony from last year. One person has been carefully cut out.",
+ choices:[
+  ["Show Sophie.","Sophie recognises the photograph but says she doesn't remember the person.",{sophie:7},["A person was cut out of the old photograph"]],
+  ["Show Ruby.","Ruby notices the photograph was taken during a school event that was never mentioned in the yearbook.",{ruby:12},["The photograph came from an unlisted school event"]],
+  ["Keep it to yourself.","You carefully place the photograph in your notebook.",{},["An old trophy ceremony photograph"]]
+ ]
+},
+
+{
+ title:"After School",
+ place:"Art Room",
+ story:"The school is quieter after the final bell. You have a little free time before going home. Ruby is finishing a painting and Noah is collecting his books.",
+ choices:[
+  ["Help Ruby with her painting.","You spend the afternoon talking about art, school and friendships.",{ruby:15},null],
+  ["Walk home with Noah.","He tells you that he has been looking into the school's old records.",{noah:15},["Noah has been researching old school records"]],
+  ["Stay and explore.","You find a locked storage room near the art department.",{},["A locked storage room near the art department"]]
+ ]
+},
+
+{
+ title:"A Strange Message",
+ place:"Cafeteria",
+ story:"Your phone buzzes during lunch. An unknown number sends you a message: 'Stop looking into things that don't concern you.'",
+ choices:[
+  ["Reply: Who is this?","The sender reads your message but doesn't respond.",{},["An anonymous warning message"]],
+  ["Tell Sophie.","Sophie tells you to be careful. She offers to help.",{sophie:10},null],
+  ["Ignore it.","You put your phone away and carry on with lunch.",{},null]
+ ]
+},
+
+{
+ title:"The School Records",
+ place:"Library",
+ story:"Noah invites you to help look through old school records. A particular year seems to be missing from the archive.",
+ choices:[
+  ["Work with Noah.","Together, you find a reference to a room that no longer appears on the school map.",{noah:15},["A missing year in the school archive","A reference to an unlisted room"]],
+  ["Ask the librarian.","The librarian says the records were moved several years ago.",{},["The old records were moved"]],
+  ["Look through the yearbooks.","You discover that several photographs from the same ceremony are missing.",{},["Several photographs are missing"]]
+ ]
+},
+
+{
+ title:"The School Event",
+ place:"Gym",
+ story:"Westbridge announces its annual school social event. Everyone is talking about who they will go with and what they will wear.",
+ choices:[
+  ["Help Sophie organise it.","You spend time making decorations and planning activities.",{sophie:12},null],
+  ["Join Ethan's planning team.","Ethan has lots of ideas, most of them ridiculous.",{ethan:15},null],
+  ["Help Amelia with the arrangements.","Amelia seems surprised that you offered. She starts opening up a little.",{amelia:15},null]
+ ]
+},
+
+{
+ title:"The Unlocked Office",
+ place:"Administration",
+ story:"You notice that a box of old school documents has been left outside the administration office. One folder has your school's crest on it.",
+ choices:[
+  ["Ask a staff member about the folder.","You are given permission to look at an old public school document.",{},["An old school document"]],
+  ["Mention it to Noah.","Noah recognises the date on the folder and becomes unusually interested.",{noah:10},["A familiar date on the folder"]],
+  ["Leave it alone.","You decide not to interfere with school documents.",{},null]
+ ]
+},
+
+{
+ title:"Rumours",
+ place:"Courtyard",
+ story:"A rumour spreads that one of the students knows where the trophy is. Different people have different theories.",
+ choices:[
+  ["Ask around without accusing anyone.","People begin sharing little details with you.",{sophie:5,ethan:5,ruby:5},["Several conflicting rumours"]],
+  ["Ask Amelia directly.","She tells you that rumours are usually started by people who want attention.",{amelia:8},null],
+  ["Talk to Ruby privately.","Ruby says that the same rumour has been circulating for years.",{ruby:12},["An old rumour about the trophy"]]
+ ]
+},
+
+{
+ title:"The Group Chat",
+ place:"Cafeteria",
+ story:"You are added to a group chat with Sophie, Noah, Amelia, Ethan and Ruby. The conversation starts with jokes, then someone mentions the missing trophy.",
+ choices:[
+  ["Ask everyone what they know.","The group chat becomes unusually quiet. Then Noah sends a private message.",{noah:8,sophie:5},["Noah sent a private message"]],
+  ["Make a joke to lighten the mood.","Ethan responds immediately. The conversation returns to normal.",{ethan:12},null],
+  ["Privately message Amelia.","She says she wants to explain something, but not over text.",{amelia:12},["Amelia wants a private conversation"]]
+ ]
+},
+
+{
+ title:"The Secret Corridor",
+ place:"Library",
+ story:"A reference in the school archive leads you to a corridor behind the old library shelves. It is not on the current school map.",
+ choices:[
+  ["Explore with Noah.","You find an old noticeboard covered in faded announcements.",{noah:12},["A hidden corridor","An old noticeboard"]],
+  ["Ask Ruby to come with you.","Ruby recognises a symbol painted on the wall from an old school photograph.",{ruby:12},["A familiar symbol in the hidden corridor"]],
+  ["Investigate by yourself.","You find a small envelope tucked behind a loose panel.",{},["A hidden envelope"]]
+ ]
+},
+
+{
+ title:"The Missing Piece",
+ place:"Classroom",
+ story:"A new clue changes the way you understand the old photograph. Someone has kept a copy of the original.",
+ choices:[
+  ["Ask Sophie to help find it.","Sophie contacts someone who might know where it is.",{sophie:12},["A possible copy of the original photograph"]],
+  ["Ask Noah to compare records.","Noah notices that the dates don't quite match.",{noah:12},["The dates in the records do not match"]],
+  ["Search the art room.","You find a small envelope containing a photograph fragment.",{ruby:5},["A fragment of the original photograph"]]
+ ]
+},
+
+{
+ title:"The Friendship Test",
+ place:"Courtyard",
+ story:"Your friendships are growing, but not everyone agrees with your investigation. Someone tells you that you are getting too involved.",
+ choices:[
+  ["Listen to their concerns.","You decide to slow down and check that nobody feels pressured.",{sophie:8,ruby:8},null],
+  ["Explain why the mystery matters.","You explain that you want to understand what happened, not accuse anyone.",{noah:8,ethan:5},null],
+  ["Take a break from investigating.","You spend the afternoon enjoying the company of your friends.",{sophie:5,ethan:5,ruby:5},null]
+ ]
+},
+
+{
+ title:"The Old Storage Room",
+ place:"Administration",
+ story:"With permission, you finally get to examine the old storage room. Inside are boxes of school event decorations and several labelled folders.",
+ choices:[
+  ["Search the event folders.","You discover a record of an event that was removed from the school's public calendar.",{},["A removed school event record"]],
+  ["Look through the photographs.","You find a photograph showing several familiar people in an unexpected place.",{},["A photograph of familiar people"]],
+  ["Ask Amelia what she remembers.","Amelia tells you that the event was more important than people realise.",{amelia:15},["Amelia remembers the old event"]]
+ ]
+},
+
+{
+ title:"A Difficult Conversation",
+ place:"Cafeteria",
+ story:"One of your friends asks whether you trust them. It is clear that they have been keeping something to themselves.",
+ choices:[
+  ["Tell them you trust them.","They appreciate your honesty, even though they still seem nervous.",{sophie:10,noah:10},null],
+  ["Say trust takes time.","They agree. You decide to give each other some space.",{ruby:8},null],
+  ["Ask them what they are hiding.","They finally share an important part of the story.",{amelia:12,ethan:5},["A friend's hidden information"]]
+ ]
+},
+
+{
+ title:"The Evidence Board",
+ place:"Library",
+ story:"You put together everything you have discovered. The photographs, records, messages and old rumours seem connected.",
+ choices:[
+  ["Compare all the dates.","You notice a pattern in the timeline.",{},["A timeline connecting the evidence"]],
+  ["Compare the people in the photographs.","You discover that some people were present at events they claimed not to attend.",{},["An inconsistency in the photographs"]],
+  ["Ask your friends to help.","Everyone contributes a different detail. Together you make progress.",{sophie:5,noah:5,amelia:5,ethan:5,ruby:5},["A group theory about the trophy"]]
+ ]
+},
+
+{
+ title:"The Final Clue",
+ place:"Secret Corridor",
+ story:"An envelope appears in your locker. Inside is a note asking you to return to the place where the investigation first began.",
+ choices:[
+  ["Tell your closest friend.","You decide that you shouldn't face the final part of the mystery alone.",{sophie:8,noah:8,amelia:8,ethan:8,ruby:8},["A final invitation"]],
+  ["Go alone.","You keep the note private and decide to investigate carefully.",{},["A final invitation"]],
+  ["Show everyone.","You gather the group and compare what each person knows.",{sophie:5,noah:5,amelia:5,ethan:5,ruby:5},["A final invitation"]]
+ ]
+},
+
+{
+ title:"Everything Comes Together",
+ place:"Main Hall",
+ story:"The final day has arrived. You have gathered clues, built friendships and heard several different versions of the same events. Now you must decide what you believe.",
+ choices:[
+  ["Present all your evidence.","You carefully explain the timeline and the clues you collected.",{},["Your final evidence presentation"]],
+  ["Let your friends explain what they know.","Everyone contributes their memories and discoveries.",{sophie:8,noah:8,amelia:8,ethan:8,ruby:8},["Your friends' final statements"]],
+  ["Reveal your own theory.","You explain your conclusion and ask everyone to consider the evidence.",{},["Your final theory"]]
+ ]
+},
+
+{
+ title:"The Final Verdict",
+ place:"Main Hall",
+ story:"You return to the place where everything started. The people you met are waiting. The missing trophy is finally ready to be explained. But the truth is not what anyone expected...",
+ choices:[
+  ["Tell everyone what you discovered.","You take a breath and share your conclusion.",{},null],
+  ["Ask your friends to stand with you.","You look around at the people who helped you reach this moment.",{},null],
+  ["Read the final note aloud.","You unfold the note and begin reading. The room goes silent.",{},null]
+ ]
+}
+
+];
+
+/* ===================================
+   GAME DATA
+=================================== */
+
+let player={name:"",skin:"#f0c9a9",hair:"#543b31",outfit:"#788d9c"};
+let score=0;
+let currentChapter=0;
+let unlocked=0;
+let day=1;
+let timeSlot=0;
+let evidence=[];
+let journal=[];
+let visited=[];
+let completed=[];
+let messages=[];
+let choicesMade={};
+let activeLocation="";
+let endings=[];
+let finished=false;
+
+const times=["8:30 AM","10:30 AM","12:30 PM","2:00 PM","3:30 PM"];
+const weekdays=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+
+const placesById=Object.fromEntries(locations.map(p=>[p[0],p]));
+
+/* ===================================
+   BASIC SCREEN FUNCTIONS
+=================================== */
+
+function show(id) {
+ document.querySelectorAll("main > section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+}
+
+function tab(id) {
+ ["map","people","chapters","journal","evidence","phone"].forEach(t=>
+  document.getElementById(t+"Tab").classList.add("hidden"));
+ document.getElementById(id+"Tab").classList.remove("hidden");
+
+ if(id==="people")renderPeople();
+ if(id==="chapters")renderChapters();
+ if(id==="journal")renderJournal();
+ if(id==="evidence")renderEvidence();
+ if(id==="phone")renderMessages();
+}
+
+/* ===================================
+   CHARACTER CREATION
+=================================== */
+
+function updateAvatar() {
+ player.skin=document.getElementById("skin").value;
+ player.hair=document.getElementById("hair").value;
+ player.outfit=document.getElementById("outfit").value;
+
+ document.getElementById("headPreview").style.background=player.skin;
+ document.getElementById("hairPreview").style.background=player.hair;
+ document.getElementById("bodyPreview").style.background=player.outfit;
+}
+
+function beginStory() {
+ player.name=document.getElementById("playerName").value.trim()||"Alex";
+ updateAvatar();
+ show("game");
+ addJournal("You arrived at Westbridge High. Your first day begins.");
+ addMessage("Sophie","Hey!! Are you the new student? Welcome to Westbridge!");
+ updateStats();
+ renderLocations();
+ startChapter(0);
+}
+
+/* ===================================
+   STATS AND TIME
+=================================== */
+
+function updateStats() {
+ document.getElementById("dayStat").textContent=weekdays[(day-1)%5];
+ document.getElementById("timeStat").textContent=times[timeSlot];
+ document.getElementById("scoreStat").textContent=score;
+ document.getElementById("chapterStat").textContent=
+  Math.min(currentChapter+1,20)+"/20";
+}
+
+function advanceTime() {
+ timeSlot++;
+ if(timeSlot>=times.length) {
+  timeSlot=0;
+  day++;
+  if(day>5)day=1;
+  addJournal("A new school day begins.");
+ }
+ updateStats();
+}
+
+/* ===================================
+   MAP AND EXPLORATION
+=================================== */
+
+function renderLocations() {
+ document.getElementById("locationList").innerHTML=locations.map(p=>`
+  <button class="location" onclick="visitLocation('${p[0]}')">
+   <span class="emoji">${p[1]}</span>
+   <strong>${p[2]}</strong>
+   <small>${p[3]}</small>
+  </button>
+ `).join("");
+}
+
+function visitLocation(id) {
+ activeLocation=id;
+ const place=placesById[id];
+ if(!visited.includes(id)) {
+  visited.push(id);
+  addJournal("You visited the "+place[2]+".");
+ }
+ tab("map");
+ const local={
+  hall:"Students are moving between classes. You recognise a few familiar faces.",
+  cafe:"The cafeteria is full of conversation and activity.",
+  library:"The library is peaceful. A few students are studying.",
+  yard:"The courtyard is sunny. Students are sitting together.",
+  class:"The classroom is slowly filling up.",
+  art:"Paintings and sketches cover the walls.",
+  gym:"The sports hall is busy with students playing games.",
+  office:"The administration office is quiet. Staff are sorting through school records."
+ };
+ scene(place[2],local[id],"What would you like to do?",[
+  ["Look around",()=>exploreLocation(id)],
+  ["See who is here",()=>peopleHere(id)],
+  ["Go somewhere else",()=>tab("map")]
+ ]);
+}
+
+function exploreLocation(id) {
+ const discoveries={
+  hall:["A folded notice","A small folded notice is hidden behind a school announcement."],
+  cafe:["A strange receipt","A receipt has been left on a table. The date is important."],
+  library:["A marked yearbook","An old yearbook has several pages marked."],
+  yard:["A dropped button","A small silver button lies beside the garden path."],
+  class:["An empty drawer","An old drawer contains a faded school photograph."],
+  art:["A sketch","A sketch shows a part of the school that is no longer on the map."],
+  gym:["An old equipment list","A list of stored school equipment has an unusual entry."],
+  office:["A school timetable","An old timetable shows a change to the school's schedule."]
+ };
+ const item=discoveries[id];
+ if(!evidence.includes(item[0])) {
+  evidence.push(item[0]);
+  score+=25;
+  addJournal("You discovered "+item[0]+": "+item[1]);
+  toast("New evidence added to your notebook! +25 points");
+ } else {
+  toast("You've already searched this location.");
+ }
+ advanceTime();
+ saveGame();
+ renderEvidence();
+ scene("Exploring "+placesById[id][2],item[1],"Would you like to do something else?",[
+  ["Search again",()=>exploreLocation(id)],
+  ["Return to the map",()=>tab("map")]
+ ]);
+}
+
+function peopleHere(id) {
+ const mapping={
+  hall:["sophie","amelia"],
+  cafe:["sophie","ethan","amelia"],
+  library:["noah","ruby"],
+  yard:["ruby","ethan"],
+  class:["noah","sophie"],
+  art:["ruby"],
+  gym:["ethan"],
+  office:["noah"]
+ };
+ const ids=mapping[id]||[];
+ scene("People nearby","You look around and notice some familiar faces.","Who would you like to talk to?",
+  ids.map(cid=>[
+   "Talk to "+getCharacter(cid).name,
+   ()=>talk(cid)
+  ]).concat([["Go back",()=>tab("map")]])
+ );
+}
+
+/* ===================================
+   CHARACTER RELATIONSHIPS
+=================================== */
+
+function getCharacter(id) {
+ return characters.find(c=>c.id===id);
+}
+
+function renderPeople() {
+ document.getElementById("peopleList").innerHTML=characters.map(c=>`
+  <div class="character">
+   <div class="portrait" style="background:${c.colour}">${c.emoji}</div>
+   <div class="character-info">
+    <strong>${c.name}</strong><br>
+    <small>${c.role}</small>
+    <div class="bar"><div class="bar-fill" style="width:${c.relation}%"></div></div>
+    <small>Friendship: ${c.relation}/100</small>
+    <br><small>${relationshipLabel(c.relation)}</small>
+   </div>
+   <button class="secondary" onclick="talk('${c.id}')">Talk</button>
+  </div>
+ `).join("");
+}
+
+function relationshipLabel(n) {
+ if(n>=75)return "Very close friends";
+ if(n>=45)return "Good friends";
+ if(n>=20)return "Getting to know each other";
+ if(n>0)return "Acquaintances";
+ return "Just met";
+}
+
+const conversations={
+ sophie:[
+  ["Ask how her day is going.","Sophie tells you about a funny thing that happened in class.",10],
+  ["Ask about her weekend.","She tells you about a family outing and asks about yours.",8],
+  ["Ask what she thinks about the trophy.","She pauses before answering. 'It's been a strange week.'",7]
+ ],
+ noah:[
+  ["Ask about his favourite books.","Noah recommends a book and promises to lend it to you.",12],
+  ["Ask why he likes the library.","He says it's one of the few places where he can think.",8],
+  ["Ask about the school archives.","He mentions something unusual about the old records.",10]
+ ],
+ amelia:[
+  ["Ask about her hobbies.","She admits she likes photography more than people expect.",10],
+  ["Ask about the school social.","She tells you about the planning committee.",8],
+  ["Ask what she knows about the trophy.","She looks thoughtful before changing the subject.",7]
+ ],
+ ethan:[
+  ["Tell him a funny story.","Ethan laughs and tells you one of his own.",12],
+  ["Challenge him to a game.","He immediately accepts and gets competitive.",10],
+  ["Ask about the group chat.","He tells you some interesting things people have been saying.",8]
+ ],
+ ruby:[
+  ["Ask to see her sketchbook.","Ruby shows you several drawings of the school.",12],
+  ["Ask about her favourite music.","You discover that you share some interests.",10],
+  ["Ask about the old photographs.","She says some pictures have been deliberately removed.",9]
+ ]
+};
+
+function talk(id) {
+ const c=getCharacter(id);
+ const options=conversations[id];
+ scene("Talking with "+c.name,
+  c.name+" is spending some time with you.",
+  "Choose what you'd like to talk about.",
+  options.map((item,i)=>[
+   item[0],
+   ()=>dialogueChoice(id,i)
+  ]).concat([["Go back",()=>tab("map")]])
+ );
+}
+
+function dialogueChoice(id,index) {
+ const key=id+"-"+index;
+ if(choicesMade[key]) {
+  scene("Conversation", "You've already had this conversation with "+getCharacter(id).name+".",
+   "Maybe visit somewhere else or continue your story.");
+  return;
+ }
+ choicesMade[key]=true;
+ const c=getCharacter(id);
+ const item=conversations[id][index];
+ c.relation=Math.min(100,c.relation+item[2]);
+ score+=10;
+ advanceTime();
+ addJournal("You spoke with "+c.name+". "+item[1]);
+ addMessage(c.name,item[1]);
+ renderPeople();
+ saveGame();
+ scene(c.name,item[1],
+  "Your friendship with "+c.name+" has grown.",
+  [["Keep chatting",()=>talk(id)],["Return to the map",()=>tab("map")]]);
+}
+
+/* ===================================
+   CHAPTER ENGINE
+=================================== */
+
+function startChapter(index) {
+ if(index>unlocked)return;
+ if(index>=20)return;
+ currentChapter=index;
+ const c=chapters[index];
+ activeLocation=c.place;
+ updateStats();
+ scene(
+  "CHAPTER "+(index+1)+" · "+c.title,
+  c.story,
+  "What will you do?",
+  c.choices.map((item,i)=>[
+   item[0],
+   ()=>makeChapterChoice(index,i)
+  ])
+ );
+}
+
+function makeChapterChoice(chapterIndex,choiceIndex) {
+ const c=chapters[chapterIndex];
+ const item=c.choices[choiceIndex];
+ const key=chapterIndex+"-"+choiceIndex;
+
+ if(choicesMade["chapter-"+chapterIndex]) {
+  toast("You've already completed this chapter.");
+  return;
+ }
+
+ choicesMade["chapter-"+chapterIndex]=true;
+
+ // Apply friendship changes.
+ Object.entries(item[2]||{}).forEach(([id,amount])=>{
+  const person=getCharacter(id);
+  if(person)person.relation=Math.min(100,person.relation+amount);
+ });
+
+ // Add evidence.
+ if(item[3]) {
+  item[3].forEach(e=>{
+   if(!evidence.includes(e))evidence.push(e);
+  });
+ }
+
+ score+=50;
+ completed.push(chapterIndex);
+ addJournal("Chapter "+(chapterIndex+1)+": "+c.title+". "+item[1]);
+ advanceTime();
+
+ unlocked=Math.max(unlocked,Math.min(19,chapterIndex+1));
+
+ if(chapterIndex===19) {
+  finishStory();
+  return;
+ }
+
+ saveGame();
+ renderPeople();
+ renderChapters();
+ renderEvidence();
+
+ scene(
+  "Chapter "+(chapterIndex+1)+" complete",
+  item[1],
+  "Your decisions have been recorded. Your story continues.",
+  [
+   ["Continue to Chapter "+(chapterIndex+2)+" →",()=>startChapter(chapterIndex+1)],
+   ["Explore the school",()=>tab("map")],
+   ["View your friendships",()=>tab("people")]
+  ]
+ );
+
+ updateStats();
+}
+
+function renderChapters() {
+ document.getElementById("chapterList").innerHTML=chapters.map((c,i)=>{
+  const done=completed.includes(i);
+  const locked=i>unlocked;
+  return `
+   <div class="chapter-row" style="${locked?'opacity:.5':''}">
+    <div>
+     <strong>${done?"✓":locked?"🔒": "📖"} ${i+1}. ${c.title}</strong><br>
+     <small>${locked?"Complete earlier chapters to unlock":done?"Completed":"Available to play"}</small>
+    </div>
+    <button class="${locked?'secondary':'primary'}"
+     ${locked?'disabled':''}
+     onclick="startChapter(${i})">
+     ${done?"REPLAY":locked?"LOCKED":"PLAY"}
+    </button>
+   </div>`;
+ }).join("");
+ const progress=Math.round(completed.length/20*100);
+ document.getElementById("storyProgress").style.width=progress+"%";
+ document.getElementById("progressLabel").textContent=
+  completed.length+" of 20 chapters completed";
+}
+
+/* ===================================
+   SCENES
+=================================== */
+
+function scene(title,story,extra,buttons=[]) {
+ const box=document.getElementById("scene");
+ box.innerHTML="";
+ const banner=document.createElement("div");
+ banner.className="scene-banner";
+ const eyebrow=document.createElement("p");
+ eyebrow.className="eyebrow";
+ eyebrow.textContent=activeLocation||"Westbridge High";
+ const heading=document.createElement("h2");
+ heading.textContent=title;
+ const paragraph=document.createElement("p");
+ paragraph.textContent=story;
+ banner.append(eyebrow,heading,paragraph);
+
+ const description=document.createElement("p");
+ description.textContent=extra;
+
+ const area=document.createElement("div");
+ buttons.forEach(b=>{
+  const btn=document.createElement("button");
+  btn.className="choice";
+  btn.textContent=b[0];
+  btn.onclick=b[1];
+  area.appendChild(btn);
+ });
+ box.append(banner,description,area);
+}
+
+/* ===================================
+   JOURNAL, EVIDENCE AND MESSAGES
+=================================== */
+
+function addJournal(text) {
+ journal.unshift(text);
+ renderJournal();
+}
+
+function renderJournal() {
+ const el=document.getElementById("journalList");
+ if(!el)return;
+ el.innerHTML=journal.length?
+  journal.map(t=>'<div class="note">'+safe(t)+'</div>').join(""):
+  "<p>Your journal is empty.</p>";
+}
+
+function renderEvidence() {
+ const el=document.getElementById("evidenceList");
+ if(!el)return;
+ el.innerHTML=evidence.length?
+  evidence.map(e=>'<div class="note">🔎 '+safe(e)+'</div>').join(""):
+  "<p>You haven't discovered any evidence yet.</p>";
+}
+
+function addMessage(name,text) {
+ messages.push({name,text});
+ renderMessages();
+}
+
+function renderMessages() {
+ const el=document.getElementById("messages");
+ if(!el)return;
+ el.innerHTML=messages.length?
+  messages.map(m=>`
+   <div class="bubble">
+    <strong>${safe(m.name)}</strong><br>${safe(m.text)}
+   </div>
+  `).join(""):
+  "<p>No messages yet.</p>";
+}
+
+/* ===================================
+   FINAL ENDINGS
+=================================== */
+
+function finishStory() {
+ finished=true;
+
+ const totalFriendship=characters.reduce((n,c)=>n+c.relation,0);
+ const evidenceCount=evidence.length;
+ const chaptersDone=completed.length;
+
+ let endingTitle;
+ let endingText;
+
+ // The ending depends on evidence and relationships.
+ if(evidenceCount>=10 && totalFriendship>=160) {
+  endingTitle="The Truth Together";
+  endingText="You solved the mystery with the help of the people who became your closest friends. But just when you think everything is over, one final discovery changes what you thought you knew about Westbridge.";
+ } else if(evidenceCount>=10) {
+  endingTitle="The Determined Detective";
+  endingText="Your investigation uncovered the truth through careful observation. You managed to put the pieces together, even when you had to work alone. But there is still something unexpected waiting for you.";
+ } else if(totalFriendship>=160) {
+  endingTitle="Stronger Together";
+  endingText="Your friendships helped you understand what happened at Westbridge. You discovered that sometimes listening is more important than searching. Yet one final surprise remains.";
+ } else {
+  endingTitle="The Unfinished Story";
+  endingText="You reached the end of your investigation, but some questions remain unanswered. The school has one more surprise waiting for you.";
+ }
+
+ show("ending");
+ document.getElementById("endingContent").innerHTML=
+  "<h2>"+safe(endingTitle)+"</h2><p>"+safe(endingText)+"</p><p>Thank you for playing Behind Closed Doors.</p>";
+ document.getElementById("endingScore").textContent="⭐ Final score: "+score;
+ document.getElementById("endingRank").textContent=
+  score>=900?"Rank: Master Detective":score>=500?"Rank: Senior Investigator":"Rank: Junior Detective";
+
+ localStorage.removeItem("behindClosedDoorsSave");
+}
+
+/* ===================================
+   SAVE AND LOAD
+=================================== */
+
+function saveGame() {
+ if(!player.name) {
+  toast("Start a story before saving!");
+  return;
+ }
+
+ const data={
+  player,score,currentChapter,unlocked,day,timeSlot,
+  evidence,journal,visited,completed,messages,
+  choicesMade,
+  relationships:characters.map(c=>[c.id,c.relation]),
+  finished
+ };
+
+ try {
+  localStorage.setItem("behindClosedDoorsSave",JSON.stringify(data));
+  toast("Your game has been saved! 💾");
+ } catch(e) {
+  toast("Unable to save on this browser.");
+ }
+}
+
+function loadGame() {
+ try {
+  const raw=localStorage.getItem("behindClosedDoorsSave");
+  if(!raw) {
+   toast("No saved game found yet.");
+   return;
+  }
+  const d=JSON.parse(raw);
+  player=d.player||player;
+  score=d.score||0;
+  currentChapter=d.currentChapter||0;
+  unlocked=d.unlocked||0;
+  day=d.day||1;
+  timeSlot=d.timeSlot||0;
+  evidence=d.evidence||[];
+  journal=d.journal||[];
+  visited=d.visited||[];
+  completed=d.completed||[];
+  messages=d.messages||[];
+  choicesMade=d.choicesMade||{};
+
+  characters.forEach(c=>{
+   const saved=(d.relationships||[]).find(r=>r[0]===c.id);
+   if(saved)c.relation=saved[1];
+  });
+
+  document.getElementById("playerName").value=player.name;
+  document.getElementById("skin").value=player.skin;
+  document.getElementById("hair").value=player.hair;
+  document.getElementById("outfit").value=player.outfit;
+
+  updateAvatar();
+  show("game");
+  updateStats();
+  renderLocations();
+  renderPeople();
+  renderJournal();
+  renderEvidence();
+  renderChapters();
+  renderMessages();
+
+  if(completed.includes(19)) {
+   finishStory();
+  } else {
+   scene("Welcome back, "+player.name,
+    "Your Westbridge story is waiting for you.",
+    "What would you like to do?",
+    [
+     ["Continue your latest chapter",()=>startChapter(currentChapter)],
+     ["Explore the school",()=>tab("map")]
+    ]);
+  }
+ } catch(e) {
+  toast("Your saved game couldn't be loaded.");
+ }
+}
+
+function restartGame() {
+ if(!confirm("Are you sure? This will delete your current saved story."))return;
+ localStorage.removeItem("behindClosedDoorsSave");
+ location.reload();
+}
+
+/* ===================================
+   HELPERS
+=================================== */
+
+function safe(value) {
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+let toastTimer;
+
+function toast(message) {
+ const el=document.getElementById("toast");
+ el.textContent=message;
+ el.style.display="block";
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>el.style.display="none",2500);
+}
+
+// Automatic saving every 5 seconds.
+setInterval(()=>{
+ if(!document.getElementById("game").classList.contains("hidden")) {
+  if(player.name)saveSilently();
+ }
+},5000);
+
+function saveSilently() {
+ const data={
+  player,score,currentChapter,unlocked,day,timeSlot,
+  evidence,journal,visited,completed,messages,choicesMade,
+  relationships:characters.map(c=>[c.id,c.relation]),
+  finished
+ };
+ try {
+  localStorage.setItem("behindClosedDoorsSave",JSON.stringify(data));
+ } catch(e) {}
+}
+
+// Initial character preview.
+updateAvatar();
+
+</script>
+</body>
+</html>
